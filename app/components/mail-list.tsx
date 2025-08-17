@@ -9,14 +9,18 @@ import { useMail } from "@/app/use-mail"
 
 interface MailListProps {
   items: Mail[]
+  columns?: 1 | 2
 }
 
-export function MailList({ items }: MailListProps) {
+export function MailList({ items, columns = 1 }: MailListProps) {
   const [mail, setMail] = useMail()
 
   return (
     <ScrollArea className="h-screen">
-      <div className="flex flex-col gap-2 p-4 pt-0">
+      <div className={cn(
+        "gap-2 p-4 pt-0",
+        columns === 1 ? "flex flex-col" : "grid grid-cols-2"
+      )}>
         {items.map((item) => (
           <button
             type="button"

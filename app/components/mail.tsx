@@ -49,7 +49,7 @@ export function MailComponent ({
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
   const [activeNav, setActiveNav] = React.useState(initialCategory)
   const [mail] = useMail()
-  
+  const [columns, setColumns] = React.useState<1 | 2>(1)  // 1 for list view, 2 for grid view
   // Icon mapping for navigation items
   const navIcons: Record<string, React.ComponentType<{ className?: string }>> = {
     "home": Icons.home,
@@ -72,12 +72,9 @@ export function MailComponent ({
       case "home":
         return mails
       case "websites":
-        return mails.filter(m => !m.read)
       case "plugins":
-        // For demo, show mails from certain senders
-        return mails.filter(m => m.email.includes("smith") || m.email.includes("wilson"))
       case "skills":
-        return mails.filter(m => m.subject.toLowerCase().includes("announcement") || m.subject.toLowerCase().includes("promotion"))
+        return mails.filter(m => m.tab === activeNav)
       default:
         return mails
     }

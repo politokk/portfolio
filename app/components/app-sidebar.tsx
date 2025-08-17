@@ -10,6 +10,7 @@ import { Nav } from "@/app/components/nav"
 import { NavUser } from "@/components/nav-user"
 import { SidebarFooter } from "@/components/ui/sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { tabs } from "@/app/data";
 
 export interface NavItem {
   id?: string
@@ -44,27 +45,7 @@ export function AppSidebar({ isCollapsed, activeNav = "home", onNavClick }: AppS
       icon: Icons.home,
       url: "/",
     },
-    {
-      id: "websites",
-      name: "Websites",
-      label: "12",
-      icon: Icons.browser,
-      url: "/websites",
-    },
-    {
-      id: "plugins",
-      name: "Plugins",
-      label: "9",
-      icon: Icons.plug,
-      url: "/plugins",
-    },
-    {
-      id: "skills",
-      name: "Skills & Platforms",
-      label: "35",
-      icon: Icons.brain,
-      url: "/skills",
-    },
+    ...tabs
   ]
 
   return (
