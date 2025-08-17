@@ -3,6 +3,9 @@
 import { useRouter } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import type { ComponentProps } from "react"
+import { useState } from "react"
+import { ChevronDown, ChevronRight } from "lucide-react"
+import { mails } from "@/app/data"
 import {
   Tooltip,
   TooltipContent,
@@ -13,6 +16,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
 } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 
@@ -45,13 +51,27 @@ interface NavProps {
 
 export function Nav({ links, isCollapsed }: NavProps) {
   const router = useRouter()
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+  const [expandedItems, setExpandedItems] = useState<string[]>([])
 
   const handleClick = (link: NavProps["links"][0]) => {
-    if (link.url) {
+    // Toggle expansion for items with id
+    if (link.id) {
+      setExpandedItems(prev => 
+        prev.includes(link.id!) 
+          ? prev.filter(id => id !== link.id)
+          : [...prev, link.id!]
+      )
+    } else if (link.url) {
       router.push(link.url)
     } else if (link.onClick) {
       link.onClick()
     }
+  }
+
+  // Get mails for a specific tab
+  const getMailsForTab = (tabId: string) => {
+    return mails.filter(mail => mail.tab === tabId)
   }
 
   return (
@@ -71,8 +91,20 @@ export function Nav({ links, isCollapsed }: NavProps) {
                     onClick={() => handleClick(link)}
                     size="iconSm"
                     className="justify-center"
+                    onMouseEnter={() => setHoveredItem(link.name)}
+                    onMouseLeave={() => setHoveredItem(null)}
                   >
-                    <link.icon className="h-5 w-5  stroke-2.5 text-subtle-foreground/85" />
+                    {hoveredItem === link.name ? (
+                      <ChevronDown className="h-5 w-5 stroke-2.5 text-subtle-foreground/85" />
+                    ) : link.id ? (
+                      expandedItems.includes(link.id) ? (
+                        <ChevronDown className="h-5 w-5 stroke-2.5 text-subtle-foreground/85" />
+                      ) : (
+                        <ChevronRight className="h-5 w-5 stroke-2.5 text-subtle-foreground/85" />
+                      )
+                    ) : (
+                      <link.icon className="h-5 w-5 stroke-2.5 text-subtle-foreground/85" />
+                    )}
                     <span className="sr-only">{link.name}</span>
                   </Button>
                 </TooltipTrigger>
@@ -95,8 +127,14 @@ export function Nav({ links, isCollapsed }: NavProps) {
                 isActive={link.variant === "default"}
                 size="sm"
                 className="justify-start gap-2 [&:hover_.badge]:opacity-100"
+                onMouseEnter={() => setHoveredItem(link.name)}
+                onMouseLeave={() => setHoveredItem(null)}
               >
-                <link.icon />
+                {hoveredItem === link.name ? (
+                  <ChevronDown className="h-4 w-4" />
+                ) : (
+                  <link.icon />
+                )}
                 {link.name}
                 {link.label && (
                   <Badge variant={getBadgeVariantFromId(link.id || link.name)} className={`badge ml-auto transition-opacity duration-200 ${
@@ -106,6 +144,22 @@ export function Nav({ links, isCollapsed }: NavProps) {
                   </Badge>
                 )}
               </SidebarMenuButton>
+              {/* Show mail items when expanded */}
+              {link.id && expandedItems.includes(link.id) && (
+                <SidebarMenuSub>
+                  {getMailsForTab(link.id).map((mail) => (
+                    <SidebarMenuSubItem key={mail.id}>
+                      <SidebarMenuSubButton 
+                        className="text-xs"
+                        onClick={() => router.push(`/mail/${mail.id}`)}
+                      >
+                        <span className="truncate font-medium">{mail.name}</span>
+                        <span className="ml-auto text-muted-foreground">{mail.labels[0]}</span>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  ))}
+                </SidebarMenuSub>
+              )}
             </SidebarMenuItem>
           )
         )}
