@@ -26,7 +26,7 @@ export const teams = [
   {
     name: "Providers",
     logo: Icons.plug,
-    plan: "AI Providers",
+    plan: "AI",
     gradient: gradients.emerald,
     borderColor: "border-teal-300",
   },
@@ -56,6 +56,13 @@ export const tabs = [
     icon: Icons.brain,
     url: "/skills",
   },
+  {
+    id: "ai",
+    name: "AI",
+    label: "1",
+    icon: Icons.bot,
+    url: "/ai",
+  },
 ]
 
 export type Tab = (typeof tabs)[number]
@@ -81,7 +88,7 @@ export const mails = [
       date: "2023-10-22T10:30:00",
       read: true,
       labels: ["work", "important"],
-      tab: "websites",
+      tab: "ai",
     },
     {
       id: "3e7c3f6d-bdf5-46ae-8d90-171300f27ae2",
@@ -251,7 +258,7 @@ export const mails = [
   ]
   
   export type Mail = (typeof mails)[number] & {
-    tab: "websites" | "plugins" | "skills"
+    tab: "websites" | "plugins" | "skills" | "ai"
   }
   
   export const accounts = [

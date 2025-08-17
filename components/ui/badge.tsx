@@ -55,6 +55,8 @@ const badgeVariants = cva(
           "border-transparent bg-blue-50 text-blue-500 border-blue-200 [a&]:hover:bg-blue-500/90 focus-visible:ring-blue-500/20 dark:focus-visible:ring-blue-500/40 dark:bg-blue-500/60",
         promotions:
           "border-transparent bg-indigo-50 text-indigo-500 border-indigo-200 [a&]:hover:bg-indigo-500/90 focus-visible:ring-indigo-500/20 dark:focus-visible:ring-indigo-500/40 dark:bg-indigo-500/60",
+        ai:
+          "border-transparent bg-fuchsia-50 text-fuchsia-500 border-1 border-fuchsia-200 [a&]:hover:bg-fuchsia-500/90 focus-visible:ring-fuchsia-500/20 dark:focus-visible:ring-fuchsia-500/40 dark:bg-fuchsia-500/60",
       },
     },
   }

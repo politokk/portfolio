@@ -93,5 +93,9 @@ function getBadgeVariantFromLabel(
     return "skills"
   }
 
+  if (["ai"].includes(label.toLowerCase())) {
+    return "ai"
+  }
+
   return "default"
 }

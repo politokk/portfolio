@@ -56,6 +56,7 @@ export function MailComponent ({
     "websites": Icons.browser,
     "plugins": Icons.plug,
     "skills": Icons.brain,
+    "ai": Icons.bot,
   }
 
   // Display name mapping for navigation items
@@ -64,6 +65,7 @@ export function MailComponent ({
     "websites": "Websites",
     "plugins": "Plugins",
     "skills": "Skills & Platforms",
+    "ai": "AI",
   }
 
   // Filter mails based on selected navigation
@@ -74,6 +76,7 @@ export function MailComponent ({
       case "websites":
       case "plugins":
       case "skills":
+      case "ai":
         return mails.filter(m => m.tab === activeNav)
       default:
         return mails

@@ -25,6 +25,7 @@ function getBadgeVariantFromId(
   if (idLower === "websites") return "website"
   if (idLower === "plugins") return "plugins"
   if (idLower === "skills") return "skills"
+  if (idLower === "ai") return "ai"
   
   return "default"
 }
@@ -71,7 +72,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
                     size="iconSm"
                     className="justify-center"
                   >
-                    <link.icon />
+                    <link.icon className="h-5 w-5  stroke-2.5 text-subtle-foreground/85" />
                     <span className="sr-only">{link.name}</span>
                   </Button>
                 </TooltipTrigger>

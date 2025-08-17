@@ -9,6 +9,7 @@ const validCategories = [
   "websites",
   "plugins",
   "skills",
+  "ai"
 ]
 
 export default async function CategoryPage({ 
