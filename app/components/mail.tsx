@@ -12,7 +12,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import {
   Tabs,
-  TabsContent,
+  TabsContent,  
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
@@ -24,6 +24,7 @@ import { MailList } from "@/app/components/mail-list"
 import type { Mail } from "@/app/data"
 import { useMail } from "@/app/use-mail"
 import { Icons } from "@/components/ui/icons"
+import type { NavItemData } from "@/lib/load-meta-navigation"
 
 interface MailProps {
   accounts: {
@@ -31,7 +32,8 @@ interface MailProps {
     email: string 
     icon: React.ReactNode
   }[]
-  mails: Mail[]
+  mails: readonly Mail[]
+  navigation: NavItemData[]
   defaultLayout: number[] | undefined
   defaultCollapsed?: boolean
   navCollapsedSize: number
@@ -41,6 +43,7 @@ interface MailProps {
 export function MailComponent ({
   accounts,
   mails,
+  navigation,
   defaultLayout = [20, 32, 48],
   defaultCollapsed = false,
   navCollapsedSize,
@@ -53,8 +56,8 @@ export function MailComponent ({
   // Icon mapping for navigation items
   const navIcons: Record<string, React.ComponentType<{ className?: string }>> = {
     "home": Icons.home,
-    "websites": Icons.browser,
-    "plugins": Icons.plug,
+    "websites": Icons.globe,
+    "plugins": Icons.webcam,
     "skills": Icons.brain,
     "ai": Icons.bot,
   }
@@ -77,6 +80,10 @@ export function MailComponent ({
       case "plugins":
       case "skills":
       case "ai":
+      case "apps":
+      case "templates":
+      case "editors":
+      case "components":
         return mails.filter(m => m.tab === activeNav)
       default:
         return mails
@@ -122,6 +129,7 @@ export function MailComponent ({
             isCollapsed={isCollapsed}
             activeNav={activeNav}
             onNavClick={setActiveNav}
+            navigation={navigation}
           />
         </ResizablePanel>
         <ResizableHandle withHandle />

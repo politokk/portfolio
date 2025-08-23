@@ -2,10 +2,14 @@ import { cookies } from "next/headers"
 
 import { MailComponent } from "@/app/components/mail"
 import { accounts, mails } from "@/app/data"
+import { loadMetaNavigation } from "@/lib/load-meta-navigation"
 
 export default async function MailPage() {
   const layout = (await cookies()).get("react-resizable-panels:layout:mail")
   const collapsed = (await cookies()).get("react-resizable-panels:collapsed")
+  
+  // Load navigation from meta.json files
+  const navigation = await loadMetaNavigation()
 
   let defaultLayout = undefined
   let defaultCollapsed = undefined
@@ -36,6 +40,7 @@ export default async function MailPage() {
         <MailComponent
           accounts={accounts}
           mails={mails}
+          navigation={navigation}
           defaultLayout={defaultLayout}
           defaultCollapsed={defaultCollapsed}
           navCollapsedSize={4}
@@ -45,6 +50,7 @@ export default async function MailPage() {
         <MailComponent
           accounts={accounts}
           mails={mails}
+          navigation={navigation}
           defaultLayout={defaultLayout}
           defaultCollapsed={defaultCollapsed}
           navCollapsedSize={4}

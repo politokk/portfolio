@@ -10,7 +10,7 @@ import { Nav } from "@/app/components/nav"
 import { NavUser } from "@/components/nav-user"
 import { SidebarFooter } from "@/components/ui/sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { tabs } from "@/app/data";
+import type { NavItemData } from "@/lib/load-meta-navigation";
 
 export interface NavItem {
   id?: string
@@ -30,23 +30,34 @@ const data = {
   },
 }
 
+// Icon mapping from string to component
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  'home': Icons.home,
+  'Globe': Icons.globe,
+  'AppWindow': Icons.webcam,
+  'FileText': Icons.fileText,
+  // Add more mappings as needed
+}
+
+function getIconComponent(iconName: string): React.ComponentType<{ className?: string }> {
+  return iconMap[iconName] || Icons.fileText
+}
+
 interface AppSidebarProps {
   isCollapsed: boolean
   activeNav?: string
   onNavClick?: (navId: string) => void
+  navigation: NavItemData[]
 }
 
-export function AppSidebar({ isCollapsed, activeNav = "home", onNavClick }: AppSidebarProps) {
-  const mainNavItems = [
-    {
-      id: "home",
-      name: "Home",
-      label: "",
-      icon: Icons.home,
-      url: "/",
-    },
-    ...tabs
-  ]
+export function AppSidebar({ isCollapsed, activeNav = "home", onNavClick, navigation }: AppSidebarProps) {
+  const mainNavItems = navigation.map(item => ({
+    id: item.id,
+    name: item.name,
+    label: item.label,
+    icon: getIconComponent(item.icon),
+    url: item.url,
+  }))
 
   return (
     <>

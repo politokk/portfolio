@@ -1,0 +1,10 @@
+{
+    "title": "Apps",
+    "icon": "AppWindow",
+    "pages": [
+      "computer-use",
+      "coding", 
+      "builder"
+    ]
+  }
+  

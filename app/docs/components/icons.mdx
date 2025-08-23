@@ -1,0 +1,122 @@
+---
+title: Icons
+description: Different ways to use icons in fumadocs
+icon: Palette
+---
+
+# Icon Configuration Examples
+
+This page demonstrates all the different ways you can use icons in fumadocs.
+
+## 1. Page Icons (Frontmatter)
+
+You can set icons for individual pages using the frontmatter:
+
+```mdx
+---
+title: My Page
+icon: Home
+---
+```
+
+Available lucide-react icons include:
+- `Book` - for documentation
+- `Component` - for components
+- `Settings` - for configuration
+- `Code` - for code examples
+- `FileText` - for text files
+- `Folder` - for sections
+- `Home` - for home pages
+- `Info` - for information
+- `AlertCircle` - for warnings
+- `CheckCircle` - for success states
+
+## 2. Folder Icons (meta.json)
+
+You can set icons for folders in your `meta.json` file:
+
+```json
+{
+  "title": "Getting Started",
+  "icon": "BookOpen",
+  "pages": ["introduction", "installation", "configuration"]
+}
+```
+
+## 3. Custom Sidebar Configuration
+
+For more advanced icon customization, you can modify your layout configuration:
+
+```tsx
+// In your app/docs/layout.tsx
+import { DocsLayout } from 'fumadocs-ui/layouts/docs';
+import { Home, Book, Settings } from 'lucide-react';
+
+export default function Layout({ children }: { children: ReactNode }) {
+  return (
+    <DocsLayout 
+      tree={source.pageTree} 
+      {...baseOptions}
+      sidebar={{
+        tabs: {
+          transform: (option, node) => {
+            // Custom icon mapping based on tab name
+            const iconMap = {
+              'Guides': <Book className="w-4 h-4" />,
+              'API': <Settings className="w-4 h-4" />,
+              'Examples': <Home className="w-4 h-4" />
+            };
+            
+            return {
+              ...option,
+              icon: iconMap[option.title] || option.icon,
+            };
+          },
+        },
+      }}
+    >
+      {children}
+    </DocsLayout>
+  );
+}
+```
+
+## 4. Sidebar Links with Icons
+
+You can also add custom links with icons to your sidebar:
+
+```tsx
+<DocsLayout
+  tree={source.pageTree}
+  {...baseOptions}
+  links={[
+    {
+      text: 'GitHub',
+      url: 'https://github.com/your-repo',
+      icon: <Github className="w-4 h-4" />,
+    },
+    {
+      text: 'Discord',
+      url: 'https://discord.gg/your-server',
+      icon: <MessageCircle className="w-4 h-4" />,
+    },
+  ]}
+>
+  {children}
+</DocsLayout>
+```
+
+## Finding Icon Names
+
+To find the correct icon names from lucide-react:
+1. Visit [lucide.dev/icons](https://lucide.dev/icons)
+2. Search for the icon you want
+3. Use the PascalCase name (e.g., `FileText`, `BookOpen`, `ChevronRight`)
+
+## Troubleshooting
+
+If an icon doesn't appear:
+1. Check the browser console for warnings about missing icons
+2. Ensure the icon name is in PascalCase
+3. Verify the icon exists in lucide-react
+4. The icon handler will use `FileText` as a fallback if the icon isn't found

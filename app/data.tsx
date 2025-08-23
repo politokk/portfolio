@@ -15,53 +15,53 @@ export const teams = [
     plan: "Private",
     gradient: gradients.breeze,
     borderColor: "border-indigo-300",
-  },
-  {
-    name: "Docs",
-    logo: Icons.fileText,
-    plan: "Documentation",
-    gradient: gradients.sunset,
-    borderColor: "border-purple-300",
-  },
-  {
-    name: "Providers",
-    logo: Icons.plug,
-    plan: "AI",
-    gradient: gradients.emerald,
-    borderColor: "border-teal-300",
-  },
+  }
 ]
 
 export type Team = (typeof teams)[number]
 
 export const tabs = [
   {
+    id: "chat",
+    name: "Chat",
+    label: "6",
+    icon: Icons.bot,
+    url: "/chat",
+  },
+  {
     id: "websites",
     name: "Websites",
-    label: "6",
-    icon: Icons.browser,
+    label: "7",
+    icon: Icons.globe,
     url: "/websites",
   },
   {
-    id: "plugins",
-    name: "Plugins",
-    label: "7",
-    icon: Icons.plug,
-    url: "/plugins",
-  },
-  {
-    id: "skills",
-    name: "Skills & Platforms",
+    id: "apps",
+    name: "Apps",
     label: "5",
-    icon: Icons.brain,
-    url: "/skills",
+    icon: Icons.webcam,
+    url: "/apps",
   },
   {
-    id: "ai",
-    name: "AI",
+    id: "templates",
+    name: "Templates",
     label: "1",
-    icon: Icons.bot,
-    url: "/ai",
+    icon: Icons.fileText,
+    url: "/templates",
+  },
+  {
+    id: "editors",
+    name: "Editors",
+    label: "3",
+    icon: Icons.edit,
+    url: "/editors",
+  },
+  {
+    id: "components",
+    name: "Components",
+    label: "12",
+    icon: Icons.games,
+    url: "/components",
   },
 ]
 
@@ -255,10 +255,10 @@ export const mails = [
       labels: ["personal"],
       tab: "skills",
     },
-  ]
+  ] as const
   
   export type Mail = (typeof mails)[number] & {
-    tab: "websites" | "plugins" | "skills" | "ai"
+    tab: "websites" | "plugins" | "skills" | "ai" | "apps" | "templates" | "editors" | "components"
   }
   
   export const accounts = [

@@ -5,8 +5,6 @@
 
 :root {
   --radius: 0.5rem;
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(215.3 25% 26.7%);
   --card: hsl(0 0% 100%);
   --card-foreground: hsl(215.3 25% 26.7%);
   --popover: hsl(0 0% 100%);
@@ -24,6 +22,12 @@
   --border: hsl(214.3 31.8% 91.4%);
   --input: hsl(214.3 31.8% 91.4%);
   --ring: hsl(234.5 89.5% 73.9%);
+  --chart-1: hsl(238.7 83.5% 66.7%);
+  --chart-2: hsl(158.1 64.4% 51.6%);
+  --chart-3: hsl(292 91.4% 72.5%);
+  --chart-4: hsl(217.2 91.2% 59.8%);
+  --chart-5: hsl(170.6 76.9% 64.3%);
+  --chart-6: hsl(45.9 96.7% 64.5%);
   --sidebar: hsl(0 0% 100%);
   --sidebar-foreground: hsl(215.3 25% 26.7%);
   --sidebar-primary: hsl(238.7 83.5% 66.7%);
@@ -32,6 +36,9 @@
   --sidebar-accent-foreground:hsl(237 79% 61%);
   --sidebar-border: hsl(220 13% 91%);
   --sidebar-ring: hsl(234.5 89.5% 73.9%);
+
+
+
   --tooltip: hsl(234.5 89.5% 73.9%);
   --color-fd-background: hsl(0, 0%, 100%);
   --color-fd-foreground: hsl(0, 0%, 3.9%);

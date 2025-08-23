@@ -1,0 +1,13 @@
+{
+    "title": "Home",
+    "root": true,
+    "icon": "home",
+    "pages": [
+      "websites",
+      "apps",
+      "editors",
+      "templates",
+      "components"
+    ]
+  }
+  

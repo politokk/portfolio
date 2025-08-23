@@ -8,7 +8,7 @@ import type { Mail } from "@/app/data"
 import { useMail } from "@/app/use-mail"
 
 interface MailListProps {
-  items: Mail[]
+  items: readonly Mail[]
   columns?: 1 | 2
 }
 
